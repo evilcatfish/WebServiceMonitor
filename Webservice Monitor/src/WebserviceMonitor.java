@@ -11,11 +11,13 @@ public class WebserviceMonitor {
 	FileOutputStream fileWriter;
 	FileInputStream fileReader;
 	File file = new File("monitors.ser");
+	JButton newWS = new JButton("Add a Webservice");
+			
 		
 	public static void main(String[] args) {
 		WebserviceMonitor wsm = new WebserviceMonitor();		
 		wsm.buildGUI();
-		wsm.loadServices();
+		wsm.loadWebServices();
 		
 	}
 	
@@ -27,10 +29,15 @@ public class WebserviceMonitor {
 		JPanel background = new JPanel(layout);
 		background.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
 		mainFrame.getContentPane().add(BorderLayout.CENTER, background);
-	
+		
+		JButton newWS = new JButton("Add a Webservice");
+		newWS.addActionListener(new AddWebService());
+		mainFrame.add(BorderLayout.EAST, newWS);
+		
+		
 	}
 	
-	public void loadServices() {
+	public void loadWebServices() {
 		
 		try {
 			fileWriter = new FileOutputStream(file);
@@ -47,8 +54,24 @@ public class WebserviceMonitor {
 		
 	}
 	
-	public void testService() {
-		
+	public class AddWebService implements ActionListener {
+		public void actionPerformed(ActionEvent a) {
+			JFrame addWSFrame = new JFrame("Add a new Webservice to Monitor");
+			addWSFrame.setSize(400,400);
+			addWSFrame.setDefaultCloseOperation(0);
+			addWSFrame.setVisible(true);
+			JTextField wsName = new JTextField();
+			JTextArea wsRequestBody = new JTextArea();
+			JTextField wsURL = new JTextField();
+			
+			JPanel addScreen= new JPanel(new BorderLayout());
+			addScreen.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
+			addScreen.add(wsName);
+			addScreen.add(wsRequestBody);
+			addScreen.add(wsURL);
+		}
 	}
 
-}
+
+		
+	}
